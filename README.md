@@ -1,3 +1,5 @@
+
+
 # 🎯 Reward Hacking Environments & Monitoring Interventions
 
 <p align="center">
@@ -86,7 +88,7 @@ The main argument accepts the following intervention types:
 - `no_intervention`: RL with the loophole including extra statistics on reward hacking; no interventions applied.
 - `ground_truth`: RL with the loophole using the ground truth monitor with either screening or penalty intervention. Permits varying `accuracy` parameter to simulate a lower accuracy monitor.
 - `probe`: RL with the loophole using the probe monitor with either screening or penalty intervention.
-- `llm_judge`: RL with the loophole using the LLM judge monitor with either screening or penalty intervention.
+- `llmjudge`: RL with the loophole using the LLM judge monitor with either screening or penalty intervention.
 
 Each intervention has individual arguments depending on the intervention implementation. See `scripts/run_rl_training.py` for further details.
 
