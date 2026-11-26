@@ -118,9 +118,10 @@ def main(
     except Exception as e:
         print(f"Error running eval for {dataset_path}: {e}")
         print(traceback.format_exc())
-            
-    if llm_gen is not None:
-        llm_gen.cleanup()
+        raise
+    finally:
+        if llm_gen is not None:
+            llm_gen.cleanup()
 
 
 def default_run(
@@ -131,6 +132,11 @@ def default_run(
     overwrite: bool = False,
     **kwargs
 ):
+    if (run_name is None) != (checkpoint is None):
+        raise ValueError(
+            f"Pass both --run_name and --checkpoint to evaluate a trained run, or neither "
+            f"to evaluate the base model (got run_name={run_name!r}, checkpoint={checkpoint!r})"
+        )
     env_config = ENVIRONMENT_REGISTRY.get(env)
     main(
         evaluation_name = kwargs.get('evaluation_name', env_config.hacked_evaluation),
