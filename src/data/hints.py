@@ -24,6 +24,12 @@ class LoopholeHint(ABC):
         pass
 
     def __call__(self, example: dict, **kwargs) -> dict:
+        existing_hint = example.get("hint")
+        if existing_hint not in (None, "None", "nohint"):
+            raise ValueError(
+                f"Example {example.get('id')} already has hint '{existing_hint}'; "
+                f"refusing to apply '{self.name}' on top of it"
+            )
         example["hint"] = self.name
         example["evaluator"] = self.evaluation
         example = self.add_hint(example, **kwargs)
