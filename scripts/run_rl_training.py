@@ -324,7 +324,7 @@ def run_no_intervention(
         reward_funcs_kwargs = {
             env_config.reward_func: reward_args,
         },
-        **kwargs
+        **{k: v for k, v in kwargs.items() if k not in ['hint']},
     )
 
 
@@ -415,7 +415,7 @@ def run_ground_truth_intervention(
         steps = steps,
         seed = seed,
         **intervention_args,
-        **kwargs,
+        **{k: v for k, v in kwargs.items() if k not in ['hint']},
     )
 
 
